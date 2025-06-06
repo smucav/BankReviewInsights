@@ -8,8 +8,6 @@
 - **Bank of Abyssinia (BOA)**
 - **Dashen Bank**
 
-This project is part of the Omega Consultancy challenge and involves scraping Google Play Store reviews, preprocessing and analyzing the text data, and generating actionable insights.
-
 ---
 
 ## 1: Data Collection & Preprocessing
