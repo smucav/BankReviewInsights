@@ -274,6 +274,7 @@ See `requirements.txt`. Key libraries:
 * `nltk==3.9.1`
 * `pyLDAvis==3.4.1`
 * `wordcloud==1.9.3`
+* `oracledb==2.4.1`
 
 ---
 
@@ -285,7 +286,26 @@ See `requirements.txt`. Key libraries:
 
 ---
 
-## 🔮 Next Steps
+## 3: Store Cleaned Data in Oracle
 
-1. **3:** Store reviews and metadata in Oracle XE
+### 🎯 Objective
+Store the processed reviews in an Oracle XE database to simulate enterprise data workflows.
+
+### 🔍 Implementation
+- **Setup**: Installed Oracle XE 21c via Docker (`container-registry.oracle.com/database/express:21.3.0-xe`).
+- **Schema**:
+  - `Banks`: Stores bank details (`bank_id`, `bank_name`) with 3 rows (CBE, BOA, Dashen).
+  - `Reviews`: Stores reviews (`review_id`, `bank_id`, `review`, `rating`, `review_date`, `source`, `sentiment`, `confidence`, `theme`, `topic_probability`) with 1,087 rows.
+- **Data Insertion**: Used `scripts/insert_data_oracle.py` with `oracledb` to load `data/processed/thematic_results.csv`.
+- **SQL Dump**: Exported schema and data to `sql/bank_reviews.sql`
+
+### ✅ KPIs Achieved
+- Working Python connection and insert script (`insert_data_oracle.py`).
+- `Reviews` table populated with 1,087 entries.
+- SQL dump committed to GitHub.
+
+### 📂 Outputs
+- `scripts/insert_data_oracle.py`: Python script for data insertion.
+- `sql/bank_reviews.sql`: Schema and bank data.
+
 2. **4:** Build dashboard for stakeholder insights
