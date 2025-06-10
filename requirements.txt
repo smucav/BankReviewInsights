@@ -7,3 +7,7 @@ matplotlib
 oracledb
 scikit-learn
 spacy
+transformers==4.44.2
+pandas==2.2.3
+tqdm==4.66.5
+oracledb==2.4.1
