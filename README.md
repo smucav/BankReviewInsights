@@ -149,18 +149,6 @@ Using `distilbert-base-uncased-finetuned-sst-2-english`:
 
 ---
 
-## 📝 Interim Report
-
-Compiled in `reports/interim_report.tex` → PDF: `interim_report.pdf`
-
-Includes:
-
-* Task 1 & 2 summaries
-* Sentiment aggregates
-* Theme insights and visuals
-
----
-
 ## 🔧 Pipeline
 
 **Scripts:**
