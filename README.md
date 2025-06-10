@@ -183,37 +183,6 @@ data/processed/all_reviews.csv
 
 ---
 
-## 🗃️ Directory Structure
-
-```
-BankReviewInsights/
-├── data/
-│   ├── raw/                  # Raw review CSVs
-│   └── processed/            # Cleaned & analyzed data
-├── notebooks/
-│   ├── scrape_reviews_*.ipynb
-│   ├── eda_*.ipynb
-│   └── eda_themes.ipynb
-├── scripts/
-│   ├── scraper.py
-│   ├── preprocessor.py
-│   ├── combine_reviews.py
-│   ├── sentiment_analyzer.py
-│   ├── aggregate_sentiment.py
-│   ├── thematic_analyzer.py
-│   └── keyword_extractor.py
-├── plots/
-│   └── figures/              # PNG visuals
-├── reports/
-│   ├── interim_report.tex
-│   └── interim_report.pdf
-├── tests/                   # (Coming soon)
-├── requirements.txt
-├── README.md
-```
-
----
-
 ## 📦 Installation
 
 ```bash
@@ -221,57 +190,6 @@ git clone https://github.com/your-username/BankReviewInsights.git
 cd BankReviewInsights
 pip install -r requirements.txt
 ```
-
----
-
-## 🚀 Usage
-
-```bash
-# Scrape Reviews
-jupyter notebook notebooks/scrape_reviews_cbe.ipynb
-
-# Preprocess
-python scripts/preprocessor.py
-
-# Sentiment Analysis
-python scripts/sentiment_analyzer.py
-python scripts/aggregate_sentiment.py
-
-# Thematic Analysis
-python scripts/thematic_analyzer.py
-python scripts/keyword_extractor.py
-
-# EDA
-jupyter notebook notebooks/eda_themes.ipynb
-
-# Compile Report
-latexmk -pdf reports/interim_report.tex
-```
-
----
-
-## 📚 Dependencies
-
-See `requirements.txt`. Key libraries:
-
-* `pandas==2.2.3`
-* `google-play-scraper==1.2.7`
-* `transformers==4.44.2`
-* `gensim==4.3.3`
-* `scikit-learn==1.5.2`
-* `nltk==3.9.1`
-* `pyLDAvis==3.4.1`
-* `wordcloud==1.9.3`
-* `oracledb==2.4.1`
-
----
-
-## 📜 Git Workflow
-
-* **Branch:** `task-2` for Task 2
-* **Commits:** Scripts, notebooks, reports added
-* **PR:** Merged `task-2` into `main`
-
 ---
 
 ## 3: Store Cleaned Data in Oracle
@@ -296,4 +214,183 @@ Store the processed reviews in an Oracle XE database to simulate enterprise data
 - `scripts/insert_data_oracle.py`: Python script for data insertion.
 - `sql/bank_reviews.sql`: Schema and bank data.
 
-2. **4:** Build dashboard for stakeholder insights
+## 4: Insights and Recommendations
+
+### 🎯 Objective
+
+Derive insights from sentiment and themes, visualize results, and recommend app improvements for **CBE**, **BOA**, and **Dashen** mobile banking apps.
+
+### 🔍 Implementation
+
+Insights:
+Drivers:
+
+**Ease of Use (Positive User Experience):** Dashen (67%, 243 reviews, 4.91 avg. rating) and CBE (60%, 217 reviews, 4.81) **praised for intuitive navigation (e.g., “Best Mobile Banking app ever”).**
+
+**Responsive Customer Service:** Dashen (8%, 29 reviews, 4.97) and CBE (3%, 11 reviews, 5.0) **noted for support (e.g., “better service”).**
+
+
+### Pain Points:
+
+**Login/Re-registration Issues (Technical Issues):** BOA (12%, 45 reviews, 1.13) and CBE (4%, 13 reviews, 1.77) **face login errors (e.g., “physical presence for every app install”).**
+
+**Negative User Experience:** BOA (47%, 172 reviews, 1.16) and CBE (18%, 63 reviews, 1.57) suffer from general dissatisfaction.
+
+### Bank Comparison:
+
+**Dashen:** Highest satisfaction (67% positive, 4.91 avg. rating), minimal technical issues (2%).
+
+**CBE:** Balanced (60% positive, ~3.0 avg. rating), with Feature Requests (e.g., Amharic support).
+
+**BOA:** Lowest satisfaction (47% negative, 2.47 avg. rating), high technical issues (12%).
+
+
+**Visualizations:** Created 7 plots using scripts/insights_analyzer.py with Matplotlib/Seaborn:
+
+
+Sentiment trends over time (`sentiment_trends.png`)
+
+Rating distributions by bank (`rating_distributions.png`)
+
+Theme percentages by bank (`theme_percentages.png`)
+
+Keyword clouds per bank (e.g., `keyword_cloud_dashen_bank.png`)
+
+Sentiment distribution by bank (`sentiment_distribution.png`)
+
+### Recommendations:
+
+Streamline login/re-registration for BOA and CBE using implicit app source verification (e.g., Google Play).
+
+Implement Amharic UI for CBE to address Feature Requests.
+Improve BOA’s app stability via usability testing to reduce crashes.
+
+**Ethics**:
+* Negative skew: Reviews over-represent dissatisfied users (BOA: 47% negative).
+* Language bias: Excluded Amharic reviews, missing local feedback.
+* Platform bias: Google Play data excludes iOS or in-person feedback.
+
+**Report**: Documented in `report/README.md`.
+
+## ✅ KPIs Achieved
+
+* **2+ drivers/pain points with evidence (4 total).**
+
+* **7 clear, labeled visualizations.**
+
+* **3 practical recommendations.**
+
+## 📂 Outputs
+```
+scripts/insights_analyzer.py: Analysis and visualization script.
+
+plots/figures/: 7 plots.
+```
+- `report/README.md`: Insights, recommendations, and ethics.
+
+- `requirements.txt`: Updated with matplotlib==3.9.2, seaborn==0.13.2, wordcloud==1.9.3.
+
+## 📦 Usage
+```
+python scripts/insights_analyzer.py
+cat task4_report.md
+sqlplus bank_reviews/Welcome123@127.0.0.1:1521/XEPDB1
+SELECT bank_name, COUNT(*) FROM Banks b JOIN Reviews r ON b.bank_id = r.bank_id GROUP BY bank_name;
+```
+
+## 🗃️ Directory Structure
+```
+BankReviewInsights/
+├── data/
+│   ├── raw/                  # Raw review CSVs
+│   ├── processed/            # Cleaned & analyzed data
+│   └── dumps/                # SQL dumps (bank_reviews.sql)
+├── notebooks/
+│   ├── scrape_reviews_*.ipynb
+│   ├── eda_*.ipynb
+│   └── eda_themes.ipynb
+├── scripts/
+│   ├── scraper.py
+│   ├── preprocessor.py
+│   ├── combine_reviews.py
+│   ├── sentiment_analyzer.py
+│   ├── aggregate_sentiment.py
+│   ├── thematic_analyzer.py
+│   ├── keyword_extractor.py
+│   ├── insert_data_oracle.py
+│   └── insights_analyzer.py
+├── plots/
+│   └── figures/              # PNG visuals
+├── reports/
+│   ├── interim_report.tex
+│   ├── interim_report.pdf
+│   └── task4_report.md
+├── tests/                    # (Coming soon)
+├── requirements.txt
+├── README.md
+```
+
+
+## 📦 Installation
+
+```
+git clone https://github.com/your-username/BankReviewInsights.git
+cd BankReviewInsights
+pip install -r requirements.txt
+```
+
+
+## 🚀 Usage
+```bash
+# Scrape Reviews
+jupyter notebook notebooks/scrape_reviews_cbe.ipynb
+
+# Preprocess
+python scripts/preprocessor.py
+
+# Sentiment Analysis
+python scripts/sentiment_analyzer.py
+python scripts/aggregate_sentiment.py
+
+# Thematic Analysis
+python scripts/thematic_analyzer.py
+python scripts/keyword_extractor.py
+
+# Store in Oracle
+python scripts/insert_data_oracle.py
+
+# Insights and Recommendations
+python scripts/insights_analyzer.py
+
+# EDA
+jupyter notebook notebooks/eda_themes.ipynb
+```
+
+## 📚 Dependencies
+
+See `requirements.txt`. Key libraries:
+
+* `pandas==2.2.3`
+* `google-play-scraper==1.2.7`
+* `transformers==4.44.2`
+* `gensim==4.3.3`
+* `scikit-learn==1.5.2`
+* `nltk==3.9.1`
+* `pyLDAvis==3.4.1`
+* `wordcloud==1.9.3`
+* `oracledb==2.4.1`
+* `matplotlib==3.9.2`
+* `seaborn==0.13.2`
+---
+
+## 📜 Git Workflow
+
+* **Branches:** `task-1`, `task-2`, `task-3`, `task-4`
+
+* **Commits:** Scripts, notebooks, SQL dumps, visuals, and reports added
+
+* **Pull Requests:** Merged `task-1`, `task-2`, `task-3`, `task-4` into `main`
+
+## 🔮 Next Steps
+
+Future: Optimize database queries, enhance AI-driven insights, and explore iOS reviews.
