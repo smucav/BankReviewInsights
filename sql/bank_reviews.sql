@@ -1,3 +1,4 @@
+-- revised version
 ALTER SESSION SET CONTAINER = XEPDB1;
 CREATE USER bank_reviews IDENTIFIED BY Welcome123 QUOTA UNLIMITED ON USERS;
 GRANT CONNECT, RESOURCE, CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO bank_reviews;
@@ -20,6 +21,9 @@ CREATE TABLE Reviews (
     topic_probability NUMBER(3,2),
     FOREIGN KEY (bank_id) REFERENCES Banks(bank_id)
 );
+
+CREATE SEQUENCE bank_id_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE review_id_seq START WITH 1 INCREMENT BY 1;
 
 INSERT INTO Banks (bank_id, bank_name) VALUES (1, 'Commercial Bank of Ethiopia');
 INSERT INTO Banks (bank_id, bank_name) VALUES (2, 'Bank of Abyssinia');
