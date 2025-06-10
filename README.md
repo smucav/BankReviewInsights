@@ -391,6 +391,13 @@ See `requirements.txt`. Key libraries:
 
 * **Pull Requests:** Merged `task-1`, `task-2`, `task-3`, `task-4` into `main`
 
+## 🧪 Tests
+
+Unit tests for the project are located in the `tests/` directory, implemented using Python's `unittest` framework. Tests cover key functionalities, such as data preprocessing, sentiment analysis, and visualization generation, ensuring code reliability and correctness. Run tests with:
+
+```bash
+python -m unittest discover tests
+```
 ## 🔮 Next Steps
 
 Future: Optimize database queries, enhance AI-driven insights, and explore iOS reviews.
