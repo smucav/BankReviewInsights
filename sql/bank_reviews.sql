@@ -22,7 +22,6 @@ CREATE TABLE Reviews (
     FOREIGN KEY (bank_id) REFERENCES Banks(bank_id)
 );
 
-CREATE SEQUENCE bank_id_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE review_id_seq START WITH 1 INCREMENT BY 1;
 
 INSERT INTO Banks (bank_id, bank_name) VALUES (1, 'Commercial Bank of Ethiopia');
